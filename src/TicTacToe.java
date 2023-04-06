@@ -22,7 +22,27 @@ public class TicTacToe {
 
     private static boolean isWin(String player) { /* implementation */ }
 
-
+    // Define main method
+    public static void main(String[] args) {
+        // Clear the board and set player to X
+        clearBoard(); player = "X";
+        // Loop until the game is over
+        while (true) {
+            // Display the board and prompt for player input
+            display(); int rowMove =  int colMove = int row = rowMove - 1; int col = colMove - 1;
+            // Check if the move is valid
+            if (!isValidMove(row, col)) {
+                System.out.println("Invalid move. Try again."); continue; }
+            // Move is valid, update the board
+            board[row][col] = player;
+            // Check for a win or tie if
+            (isWin(player)) { System.out.println(player + " wins!"); if (SafeInput.getYNConfirm(Scanner, "Play again?")) // Player has won, display message and prompt to play again
+            { clearBoard(); player = "X"; continue;
+            } else {
+                break; } }
+            else if (/* check for tie */) { // Game is a tie, display message and prompt to play again
+             System.out.println("It's a tie!"); if (SafeInput.getYNConfirm(Scanner, "Play again?")) { clearBoard(); player = "X"; continue; } else { break; } } // Move is valid and game is not over
+            if (player.equals("X")) { player = "O"; } else { player = "X"; } } }
 
     public static void main(String[] args) {
         clearBoard();
