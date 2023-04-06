@@ -6,6 +6,24 @@ public class TicTacToe {
 
     private static String player = "X";
 
+    // Declare class-level variables
+    private static final int ROW = 3; private static final int COL = 3;
+
+    private static String[][] board = new String[ROW][COL];
+
+    private static String player = "X";
+
+    // Define helper methods
+    private static void clearBoard() { /* implementation */ }
+
+    private static void display() { /* implementation */ }
+
+    private static boolean isValidMove(int row, int col) { /* implementation */ }
+
+    private static boolean isWin(String player) { /* implementation */ }
+
+
+
     public static void main(String[] args) {
         clearBoard();
         display();
@@ -103,3 +121,4 @@ public class TicTacToe {
     private static boolean isTie() {
         for (int row = 0; row < ROW; row++) {
             for (int col = 0; col < COL;}
+
