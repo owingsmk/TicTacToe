@@ -68,7 +68,8 @@ public class TicTacToe {
             }
         }
         board[row][col] = symbol; //Setting the position on the board to the players symbol
-        drawBoard(board);
+
+
     }
 
     public static void drawBoard(char[][] board) {
@@ -78,5 +79,19 @@ public class TicTacToe {
             }
             System.out.println();
         }
+    }
+
+    public static char hasWon(char[][] board){
+        for(int i =0; i < 3; i++) { //Row
+            if (board [i][0] == board [i][1] && board [i][1] == board [i][2] && board [i][0] != '_'){
+                return board [i][0];
+            }
+        }
+        for(int j =0; j < 3; j++) { //Cow
+            if (board [0][j] == board [1][j] && board [1[j] == board [2][j] && board [0][j] != '_'){
+                return board [0][j];
+            }
+        }
+
     }
 }
