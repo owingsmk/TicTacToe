@@ -104,13 +104,9 @@ public class TicTacToe {
     }
         private static boolean isTie() {
             for (int row = 0; row < ROW; row++) {
-                for (int col = 0; col < COL; col++){
-                    if (board [row][col == " "]){
-                        return false;
-                    }
+                for (int col = 0; col < COL; col++);
                 }
             }
-            return true;
         }
 
         private static boolean playAgain(){
