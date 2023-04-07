@@ -2,150 +2,81 @@ import com.sun.rowset.internal.Row;
 
 import java.util.Scanner;
 public class TicTacToe {
-    private static final int ROW = 3;
-    private static final int COL = 3;
-    private static String board[][] = new String[ROW][COL];
-
-    private static String player = "X";
-
-    // Declare class-level variables
-    private static final int ROW = 3; private static final int COL = 3;
-
-    private static String[][] board = new String[ROW][COL];
-
-    private static String player = "X";
-
-    // Define helper methods
-    private static void clearBoard() { /* implementation */ }
-
-    private static void display() { /* implementation */ }
-
-    private static boolean isValidMove(int row, int col) { /* implementation */ }
-
-    private static boolean isWin(String player) { /* implementation */ }
-
-    // Define main method
-    //public static void main(String[] args) {
-        // Clear the board and set player to X
-        //clearBoard();
-        //player = "X";
-        // Loop until the game is over
-        //while (true) {
-            // Display the board and prompt for player input
-           // display();
-            //int rowMove =  int colMove = int row = rowMove - 1;
-            //int col = colMove - 1;
-            // Check if the move is valid
-            //if (!isValidMove(row, col)) {
-                //System.out.println("Invalid move. Try again.");
-               // continue; }
-            // Move is valid, update the board
-            //board[row][col] = player;
-            // Check for a win or tie if
-            //(isWin(player)) { System.out.println(player + " wins!"); if (SafeInput.getYNConfirm(Scanner, "Play again?")) // Player has won, display message and prompt to play again
-            //{ clearBoard(); player = "X";
-                //continue;
-            //} else {
-            //    break; } }
-            //else if (/* check for tie */) { // Game is a tie, display message and prompt to play again
-            // System.out.println("It's a tie!"); if (SafeInput.getYNConfirm(Scanner, "Play again?")) { clearBoard(); player = "X"; continue; } else { break; } } // Move is valid and game is not over
-            //if (player.equals("X")) { player = "O"; } else { player = "X"; } } }
 
     public static void main(String[] args) {
-        clearBoard();
-        display();
+
+        Scanner in = new Scanner(System.in);
+
+        //Gets player names
+        System.out.println("Player 1, what's your name? ");
+        String p1 = in.nextLine();
+        System.out.println("Player 2, what's your name? ");
+        String p2 = in.nextLine();
+
+        //3x3 Tic Tac Toe board
+        //-empty space
+        //x player 1
+        //o player 2
+        char[][] board = new char[3][3];
+
+        //Fill the board with dashes
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++) {
+                board[i][j] = '_';
+            }
+        }
+
+        //Draw the board
+        drawBoard(board);
+
+        //Keep track of whose turn it is
+        boolean isPlayer1 = true;
+
+        //Keep track of what symbol we are using to Play
+        char symbol = ' ';
+        if (isPlayer1) {
+            symbol = 'x';
+        } else {
+            symbol = 'o';
+        }
+
+        //Players turns
+        if (isPlayer1){
+            System.out.println(p1 + "'s turn (X):");
+        } else {
+            System.out.println(p2 + "'s turn (O):");
+        }
+
+        int row = 0;
+        int col = 0;
+
         while (true) {
-            int rowMove = getMove("row");
-            int colMove = getMove("col");
-            if (!isValidMove(rowMove, colMove)) {
-                System.out.println("Invalid move, try again.");
-                continue;
-            }
-            board[rowMove - 1][colMove - 1] = player;
-            display();
-            if (isWin(player)) {
-                System.out.println(player + " wins!");
-                if (playAgain()) {
-                    clearBoard();
-                    display();
-                    continue;
-                } else {
-                    break;
-                }
-            }
-            if (isTie()) {
-                System.out.println("It's a tie!");
-                if (playAgain()) {
-                    clearBoard();
-                    display();
-                    continue;
-                } else {
-                    break;
-                }
-            }
-            togglePlayer();
-        }
-    }
+            //Get row and col from user
+            System.out.print("Enter a row (0,1 or 2): ");
+            row = in.nextInt();
+            System.out.print("Enter a col (0,1 or 2): ");
+            col = in.nextInt();
 
-    private static void clearBoard() {
-        for (int row = 0; row < ROW; row++) {
-            for (int col = 0; col < COL; col++) {
-                board[row][col] = " ";
+
+            if (row < 0 || col < 0 || row > 2 || col > 2) { //Check if row and col are valid
+                System.out.println("You entered incorrect row and col, please try again!");
+            } else if (board[row][col] != '_') {
+                System.out.println("This spot is already taken!"); //board position check for used spots
+            } else {
+                //this checks if Row and Col are valid
+                break;
             }
         }
+        board[row][col] = symbol; //Setting the position on the board to the players symbol
+        drawBoard(board);
     }
 
-    private static void display() {
-        System.out.println("-------------");
-        for (int row = 0; row < ROW; row++) {
-            System.out.print("| ");
-            for (int col = 0; col < COL; col++) {
-                System.out.print(board[row][col] + " | ");
+    public static void drawBoard(char[][] board) {
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++) {
+                System.out.print(board[i][j]);
             }
             System.out.println();
-            System.out.println("-------------");
         }
     }
-
-    private static int getMove(String coordinate) {
-        Scanner console = new Scanner(System.in);
-        String prompt = "Enter " + coordinate + " coordinate (1-3): ";
-        return SafeInput.getRangedInt(console, prompt, 1, 3);
-    }
-
-    private static boolean isValidMove(int row, int col) {
-        if (board[row - 1][col - 1] == " ") {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static boolean isWin(String player) {
-        // Check rows
-        for (int row = 0; row < ROW; row++) {
-            if (board[row][0] == player && board[row][1] == player && board[row][2] == player) {
-                return true;
-            }
-        }
-        // Check columns
-        for (int col = 0; col < COL; col++) {
-            if (board[0][col] == player && board[1][col] == player && board[2][col] == player) {
-                return true;
-            }
-        }
-        // Check diagonals
-        if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
-            return true;
-        }
-        if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
-            return true;
-        }
-        // No win found
-        return false;
-    }
-
-    private static boolean isTie() {
-        for (int row =0; row < ROW; row++);
-            for (int col = 0; col < COL; col++);
-    }
+}
