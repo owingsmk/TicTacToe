@@ -106,12 +106,15 @@ public class TicTacToe {
     }
         private static boolean isTie() {
             for (int row = 0; row < ROW; row++) {
-                for (int col = 0; col < COL; col++);
+                for (int col = 0; col < COL; col++) ;
+                {
                 }
             }
+            return false;
+        }
 
     private static boolean playAgain() {
-        Scanner.in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         return SafeInput.getYNConfirm(in, "Would you like to play again?");
     }
 }
