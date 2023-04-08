@@ -11,9 +11,11 @@ public class TicTacToe {
     public static void main(String[] args) {
         clearBoard();
         display();
+
         while (true) {
             int rowMove = getMove("row");
             int colMove = getMove("col");
+
             if (!isValidMove(rowMove, colMove)) {
                 System.out.println("Invalid move, try again.");
                 continue;
@@ -107,9 +109,10 @@ public class TicTacToe {
                 for (int col = 0; col < COL; col++);
                 }
             }
-        }
 
-        private static boolean playAgain(){
-        return SafeInput.getYNConfirm();
-        }
+    private static boolean playAgain() {
+        Scanner.in = new Scanner(System.in);
+        return SafeInput.getYNConfirm(in, "Would you like to play again?");
+    }
 }
+
